@@ -1,0 +1,70 @@
+<form [formGroup]="filtroForm" (ngSubmit)="filtrar()">
+  <div class="row align-items-end">
+    <div class="col-md">
+      <div class="form-group">
+        <label for="nomeEmpresa">Nome</label>
+        <input type="text" formControlName="nome" class="form-control" id="nomeEmpresa" aria-describedby="nomeEmpresa" maxlength="150">
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <label for="cnpjEmpresa">CNPJ</label>
+        <input type="text" appMascaraCnpj formControlName="cnpj" class="form-control" id="cnpjEmpresa" aria-describedby="cnpjEmpresa" maxlength="18">
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <label for="dataFundacaoEmpresa">Data Fundação</label>
+        <input type="date" formControlName="dataFundacao" class="form-control" id="dataFundacaoEmpresa"
+          aria-describedby="dataFundacaoEmpresa">
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="row align-items-end mb-4">
+  <div class="col">
+    <button type="button" class="btn btn-primary" [routerLink]="['/empresas/cadastro']">Novo</button>
+  </div>
+</div>
+<div class="row align-items-end mb-4">
+  <div class="col">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">NOME</th>
+            <th scope="col">CNPJ</th>
+            <th scope="col">DATA FUNDAÇÃO</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let empresa of empresas">
+            <th scope="row">{{ empresa.id }}</th>
+            <td>{{ empresa.nome }}</td>
+            <td>{{ empresa.cnpj }}</td>
+            <td>{{ empresa.dataFundacao | date:"dd/MM/yyyy" }}</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="botaoMaisOpcoes"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Mais opções
+                </button>
+                <div class="dropdown-menu" aria-labelledby="botaoMaisOpcoes">
+                  <a class="dropdown-item" [routerLink]="['/empresas/cadastro', empresa.id]">Editar</a>
+                  <a class="dropdown-item hoverable" (click)="excluir(empresa.id)">Excluir</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
