@@ -1,3 +1,4 @@
+import { CargoService } from './cargo/cargo.service';
 import { LoggingService } from './core/logging.service';
 import { ErrorService } from './core/error.service';
 import { AlertaService } from './alerta/alerta.service';
@@ -20,6 +21,8 @@ import { DatePipe } from '@angular/common';
 import { MascaraCnpjDirective } from './helper/mascara-cnpj.directive';
 import { GlobalErrorHandler } from './core/global-error-handler';
 import { ServerErrorInterceptor } from './core/server-error-interceptor';
+import { CadastroCargoComponent } from './cargo/cadastro-cargo/cadastro-cargo.component';
+import { EdicaoCargoComponent } from './cargo/edicao-cargo/edicao-cargo.component';
 
 @NgModule({
   declarations: [
@@ -31,7 +34,9 @@ import { ServerErrorInterceptor } from './core/server-error-interceptor';
     CadastroEmpresaComponent,
     AlertaComponent,
     EdicaoEmpresaComponent,
-    MascaraCnpjDirective
+    MascaraCnpjDirective,
+    CadastroCargoComponent,
+    EdicaoCargoComponent
   ],
   imports: [
     BrowserModule,
@@ -49,7 +54,8 @@ import { ServerErrorInterceptor } from './core/server-error-interceptor';
     DatePipe,
     AlertaService,
     ErrorService,
-    LoggingService
+    LoggingService,
+    CargoService
   ],
   bootstrap: [AppComponent]
 })

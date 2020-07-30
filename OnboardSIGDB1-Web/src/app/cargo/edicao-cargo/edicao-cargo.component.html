@@ -1,0 +1,26 @@
+<form [formGroup]="cadastroForm" (ngSubmit)="salvar()">
+  <div class="row">
+    <div class="col-md">
+      <div class="form-group">
+        <label for="descricaoCargo">Nome</label>
+        <input type="text" formControlName="descricao" class="form-control" id="descricaoCargo" aria-describedby="descricaoCargo"
+          required maxlength="250">
+        <div *ngIf="tentouSalvar && cadastroForm.get('descricao').errors" class="alert alert-danger">
+          <div *ngIf="cadastroForm.get('descricao').errors.required" class="mensagem-erro-form">Nome é obrigatório</div>
+          <div *ngIf="cadastroForm.get('descricao').errors.maxlength" class="mensagem-erro-form">
+            Tamanho máximo: {{ cadastroForm.get('descricao').errors.maxlength.requiredLength}}
+            Tamanho atual: {{ cadastroForm.get('descricao').errors.maxlength.actualLength}}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="col-md">
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <button type="button" class="btn btn-secondary" routerLink="/cargos">Voltar</button>
+      </div>
+    </div>
+  </div>
+</form>

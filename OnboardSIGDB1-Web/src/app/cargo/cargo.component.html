@@ -1,3 +1,38 @@
-<p>
-  cargo works!
-</p>
+<div class="row align-items-end mb-4">
+  <div class="col">
+    <button type="button" class="btn btn-primary" [routerLink]="['/cargos/cadastro']">Novo</button>
+  </div>
+</div>
+<div class="row align-items-end mb-4">
+  <div class="col">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">DESCRIÇÃO</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let cargo of cargos">
+            <th scope="row">{{ cargo.id }}</th>
+            <td>{{ cargo.descricao }}</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="botaoMaisOpcoes"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Mais opções
+                </button>
+                <div class="dropdown-menu" aria-labelledby="botaoMaisOpcoes">
+                  <a class="dropdown-item" [routerLink]="['/cargos/cadastro', cargo.id]">Editar</a>
+                  <a class="dropdown-item hoverable" (click)="excluir(cargo.id)">Excluir</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

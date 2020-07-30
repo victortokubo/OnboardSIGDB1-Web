@@ -86,6 +86,5 @@ export class EdicaoEmpresaComponent implements OnInit, AfterViewInit {
         console.log(error);
         this.alertaService.error(error, true);
       });
-
   }
 }
