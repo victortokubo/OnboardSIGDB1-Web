@@ -15,8 +15,6 @@ export class AlertaComponent implements OnInit {
 
     ngOnInit() {
         this.alertaservice.getAlert().subscribe((alert: Alerta) => {
-            console.log('alert')
-            console.log(alert)
             if (!alert) {
                 // clear alertas when an empty alert is received
                 this.alertas = [];
@@ -27,9 +25,9 @@ export class AlertaComponent implements OnInit {
             this.alertas.push(alert);
 
             let s = setTimeout(() => {
-                this.removeAlert(alert);    
+                this.removeAlert(alert);
                 clearTimeout(s);
-            }, 5000); 
+            }, 5000);
         });
     }
 

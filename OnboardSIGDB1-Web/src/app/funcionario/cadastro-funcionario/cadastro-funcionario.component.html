@@ -1,15 +1,15 @@
 <div class="row">
   <div class="col-md">
-    <h1>Cadastro Empresa</h1>
+    <h1>Cadastro Funcionário</h1>
   </div>
 </div>
 <form [formGroup]="cadastroForm" (ngSubmit)="salvar()">
   <div class="row">
     <div class="col-md">
       <div class="form-group">
-        <label for="nomeEmpresa">Nome</label>
-        <input type="text" formControlName="nome" class="form-control" id="nomeEmpresa" aria-describedby="nomeEmpresa"
-          required maxlength="150">
+        <label for="nomeFuncionario">Nome</label>
+        <input type="text" formControlName="nome" class="form-control" id="nomeFuncionario"
+          aria-describedby="nomeFuncionario" required maxlength="150">
         <div *ngIf="tentouSalvar && cadastroForm.get('nome').errors" class="alert alert-danger">
           <div *ngIf="cadastroForm.get('nome').errors.required" class="mensagem-erro-form">Nome é obrigatório</div>
           <div *ngIf="cadastroForm.get('nome').errors.maxlength" class="mensagem-erro-form">
@@ -23,23 +23,23 @@
   <div class="form-row">
     <div class="col-md">
       <div class="form-group">
-        <label for="cnpjEmpresa">CNPJ</label>
-        <input type="text" appMascaraCnpj formControlName="cnpj" class="form-control" id="cnpjEmpresa"
-          aria-describedby="cnpjEmpresa" required maxlength="18">
-        <div *ngIf="tentouSalvar && cadastroForm.get('cnpj').errors" class="alert alert-danger">
-          <div *ngIf="cadastroForm.get('cnpj').errors.required" class="mensagem-erro-form">CNPJ é obrigatório</div>
-          <div *ngIf="cadastroForm.get('cnpj').dirty && cadastroForm.get('cnpj').errors.cnpjInvalido"
+        <label for="cpfFuncionario">CPF</label>
+        <input type="text" appMascaraCpf formControlName="cpf" class="form-control" id="cpfFuncionario"
+          aria-describedby="cpfFuncionario" required maxlength="14">
+        <div *ngIf="tentouSalvar && cadastroForm.get('cpf').errors" class="alert alert-danger">
+          <div *ngIf="cadastroForm.get('cpf').errors.required" class="mensagem-erro-form">CPF é obrigatório</div>
+          <div *ngIf="cadastroForm.get('cpf').dirty && cadastroForm.get('cpf').errors.cpfInvalido"
             class="mensagem-erro-form">
-            CNPJ inválido
+            CPF inválido
           </div>
         </div>
       </div>
     </div>
     <div class="col-md">
       <div class="form-group">
-        <label for="dataFundacaoEmpresa">Data Fundação</label>
-        <input type="date" formControlName="dataFundacao" class="form-control" id="dataFundacaoEmpresa"
-          aria-describedby="dataFundacaoEmpresa">
+        <label for="dataContratacaoFuncionario">Data Contratação</label>
+        <input type="date" formControlName="dataContratacao" class="form-control" id="dataContratacaoFuncionario"
+          aria-describedby="dataContratacaoFuncionario">
       </div>
     </div>
   </div>
@@ -47,7 +47,7 @@
     <div class="col-md">
       <div class="form-group">
         <button type="submit" class="btn btn-primary">Salvar</button>
-        <button type="button" class="btn btn-secondary" routerLink="/empresas">Voltar</button>
+        <button type="button" class="btn btn-secondary" routerLink="/funcionarios">Voltar</button>
       </div>
     </div>
   </div>

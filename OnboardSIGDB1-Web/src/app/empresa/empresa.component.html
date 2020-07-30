@@ -1,3 +1,8 @@
+<div class="row align-items-end">
+  <div class="col-md">
+    <h1>Empresas</h1>
+  </div>
+</div>
 <form [formGroup]="filtroForm" (ngSubmit)="filtrar()">
   <div class="row align-items-end">
     <div class="col-md">
@@ -48,7 +53,7 @@
           <tr *ngFor="let empresa of empresas">
             <th scope="row">{{ empresa.id }}</th>
             <td>{{ empresa.nome }}</td>
-            <td>{{ empresa.cnpj }}</td>
+            <td>{{ empresa.cnpj | cnpjPipe }}</td>
             <td>{{ empresa.dataFundacao | date:"dd/MM/yyyy" }}</td>
             <td>
               <div class="dropdown">

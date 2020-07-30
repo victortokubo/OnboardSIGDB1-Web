@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md">
+    <h1>Vincular Funcionário a um Cargo</h1>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md">
+    <div class="form-group">
+      <label for="nomeFuncionario">Nome</label>
+      <input type="text" class="form-control" id="nomeFuncionario" aria-describedby="nomeFuncionario" disabled>
+    </div>
+  </div>
+</div>
+<form [formGroup]="cadastroForm" (ngSubmit)="salvar()">  
+  <div class="form-row">
+    <div class="col-md">
+      <div class="form-group">
+        <label for="cargos">Cargos</label>
+        <select class="custom-select" formControlName="cargoId" id="cargos">
+          <option [ngValue]="null"></option>
+          <option *ngFor="let cargo of dropdownCargo" [ngValue]="cargo.id">
+           {{ cargo.descricao }}
+          </option>
+        </select>
+      </div>
+    </div>    
+  </div>
+  <div class="form-row">
+    <div class="col-md">
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Salvar</button>
+        <button type="button" class="btn btn-secondary" routerLink="/funcionarios">Voltar</button>
+      </div>
+    </div>
+  </div>
+</form>

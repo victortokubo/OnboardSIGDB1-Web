@@ -1,45 +1,4 @@
-import { AbstractControl, Validators, ValidatorFn } from '@angular/forms';
-
-// export function CnpjValido(control: AbstractControl): Validators {
-//   let multiplicador1 = [5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
-//   let multiplicador2 = [6, 5, 4, 3, 2, 9, 8, 7, 6, 5, 4, 3, 2];
-//   let soma: number;
-//   let resto: number;
-//   let digito: string;
-//   let tempCnpj: string;
-//   let cnpj: string = control.value.toString();
-//   cnpj = cnpj.toString();
-//   cnpj.replace(".", "").replace("-", "").replace("/", "");
-//   if (cnpj.length != 14)
-//     return false;
-//   tempCnpj = cnpj.substring(0, 12);
-//   console.log(tempCnpj)
-//   soma = 0;
-//   for (let i = 0; i < 12; i++)
-//     soma += Number.parseInt(tempCnpj[i].toString()) * multiplicador1[i];
-//   resto = (soma % 11);
-//   if (resto < 2)
-//     resto = 0;
-//   else
-//     resto = 11 - resto;
-//   digito = resto.toString();
-//   tempCnpj = tempCnpj + digito;
-//   soma = 0;
-//   for (let i = 0; i < 13; i++)
-//     soma += Number.parseInt(tempCnpj[i].toString()) * multiplicador2[i];
-//   resto = (soma % 11);
-//   if (resto < 2)
-//     resto = 0;
-//   else
-//     resto = 11 - resto;
-//   digito = digito + resto.toString();
-
-//   if (cnpj.endsWith(digito)) {
-//     return { cnpjInvalido: true };
-//   }
-
-//   return null;
-// }
+import { AbstractControl } from '@angular/forms';
 
 export function CnpjValido(control: AbstractControl) {
   let cnpj = control.value.replace(/[^\d]+/g, '');
@@ -92,4 +51,46 @@ export function CnpjValido(control: AbstractControl) {
     return { cnpjInvalido: true };
 
   return null;
+}
+
+export function CpfValido(control: AbstractControl) {
+  let cpf: string = control.value.replace(/[^\d]+/g, '');
+
+  let multiplicador1 = [10, 9, 8, 7, 6, 5, 4, 3, 2];
+  let multiplicador2 = [11, 10, 9, 8, 7, 6, 5, 4, 3, 2];
+  let tempCpf: string;
+  let digito: string;
+  let soma: number;
+  let resto: number;
+  cpf = cpf.trim();
+  cpf.replace(".", "").replace("-", "");
+  if (cpf.length != 11)
+    return { cpfInvalido: true };
+  tempCpf = cpf.substring(0, 9);
+  soma = 0;
+
+  for (let i = 0; i < 9; i++)
+    soma += Number.parseInt(tempCpf[i].toString()) * multiplicador1[i];
+  resto = soma % 11;
+  if (resto < 2)
+    resto = 0;
+  else
+    resto = 11 - resto;
+  digito = resto.toString();
+  tempCpf = tempCpf + digito;
+  soma = 0;
+  for (let i = 0; i < 10; i++)
+    soma += Number.parseInt(tempCpf[i].toString()) * multiplicador2[i];
+  resto = soma % 11;
+  if (resto < 2)
+    resto = 0;
+  else
+    resto = 11 - resto;
+  digito = digito + resto.toString();
+
+  if (cpf.endsWith(digito)) {
+    return null;
+  }
+
+  return { cpfInvalido: true };
 }

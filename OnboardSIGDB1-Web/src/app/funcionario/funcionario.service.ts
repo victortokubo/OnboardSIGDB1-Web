@@ -1,58 +1,63 @@
-import { DropdownCargo } from './dropdown-cargo';
 import { Injectable } from '@angular/core';
+import { FiltroFuncionario } from './filtro-funcionario';
+import { Observable } from 'rxjs/Observable';
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
-import { Observable } from 'rxjs';
-import { Cargo } from './cargo';
+import { Funcionario } from './funcionario';
 import { catchError } from 'rxjs/operators';
 import { _throw as throwError } from 'rxjs/observable/throw';
 
 @Injectable()
-export class CargoService {
+export class FuncionarioService {
 
   private readonly _urlApi: string;
 
   constructor(private http: HttpClient) {
-    this._urlApi = 'https://localhost:44325/api/cargo'
+    this._urlApi = 'https://localhost:44325/api/funcionario'
   }
 
-  obterTodaosCargos(): Observable<Cargo[]> {
+  obterTodosFuncionarios(): Observable<Funcionario[]> {
     let endpoint = `${this._urlApi}`;
-    return this.http.get<Cargo[]>(endpoint).pipe(
+    return this.http.get<Funcionario[]>(endpoint).pipe(
       catchError(this.handleError)
     )
   }
 
-  obterCargo(id: number): Observable<Cargo> {
+  pesquisarFuncionarios(filtro: FiltroFuncionario): Observable<Funcionario[]> {
+    let endpoint = `${this._urlApi}/pesquisar`;
+    let params = new HttpParams();
+
+    params = params.append('Nome', filtro.nome)
+    params = params.append('NumeroDocumento', filtro.cpf)
+    params = params.append('Data', filtro.dataContratacao.toString());
+
+    return this.http.get<Funcionario[]>(endpoint, { params: params }).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  obterFuncionario(id: number): Observable<Funcionario> {
     let endpoint = `${this._urlApi}/${id}`;
 
-    return this.http.get<Cargo>(endpoint).pipe(
+    return this.http.get<Funcionario>(endpoint).pipe(
       catchError(this.handleError)
     )
   }
 
-  obterDropdownCargo(): Observable<DropdownCargo[]> {
-    let endpoint = `${this._urlApi}/dropdown`;
-
-    return this.http.get<DropdownCargo[]>(endpoint).pipe(
-      catchError(this.handleError)
-    )
-  }
-
-  criarCargo(cargo: Cargo) {
+  criarFuncionario(funcionario: Funcionario) {
     let endpoint = `${this._urlApi}`;
-    return this.http.post(endpoint, cargo);
+    return this.http.post(endpoint, funcionario);
   }
 
-  editarCargo(cargo: Cargo) {
+  editarFuncionario(funcionario: Funcionario) {
     let endpoint = `${this._urlApi}`;
     let params = new HttpParams();
-    params = params.append('id', cargo.id.toString());
-    return this.http.put(endpoint, cargo, { params: params }).pipe(
+    params = params.append('id', funcionario.id.toString());
+    return this.http.put(endpoint, funcionario, { params: params }).pipe(
       catchError(this.handleError)
     )
   }
 
-  excluirCargo(id: number) {
+  excluirFuncionario(id: number) {
     let endpoint = `${this._urlApi}`;
     let params = new HttpParams();
     params = params.append('id', id.toString());

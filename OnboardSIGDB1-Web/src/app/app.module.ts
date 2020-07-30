@@ -23,6 +23,14 @@ import { GlobalErrorHandler } from './core/global-error-handler';
 import { ServerErrorInterceptor } from './core/server-error-interceptor';
 import { CadastroCargoComponent } from './cargo/cadastro-cargo/cadastro-cargo.component';
 import { EdicaoCargoComponent } from './cargo/edicao-cargo/edicao-cargo.component';
+import { FuncionarioService } from './funcionario/funcionario.service';
+import { CadastroFuncionarioComponent } from './funcionario/cadastro-funcionario/cadastro-funcionario.component';
+import { EdicaoFuncionarioComponent } from './funcionario/edicao-funcionario/edicao-funcionario.component';
+import { MascaraCpfDirective } from './helper/mascara-cpf.directive';
+import { CpfPipe } from './helper/cpf.pipe';
+import { CnpjPipe } from './helper/cnpj.pipe';
+import { VinculoFuncionarioEmpresaComponent } from './funcionario/vinculo-funcionario-empresa/vinculo-funcionario-empresa.component';
+import { VinculoFuncionarioCargoComponent } from './funcionario/vinculo-funcionario-cargo/vinculo-funcionario-cargo.component';
 
 @NgModule({
   declarations: [
@@ -36,7 +44,14 @@ import { EdicaoCargoComponent } from './cargo/edicao-cargo/edicao-cargo.componen
     EdicaoEmpresaComponent,
     MascaraCnpjDirective,
     CadastroCargoComponent,
-    EdicaoCargoComponent
+    EdicaoCargoComponent,
+    CadastroFuncionarioComponent,
+    EdicaoFuncionarioComponent,
+    MascaraCpfDirective,
+    CpfPipe,
+    CnpjPipe,
+    VinculoFuncionarioEmpresaComponent,
+    VinculoFuncionarioCargoComponent
   ],
   imports: [
     BrowserModule,
@@ -55,7 +70,8 @@ import { EdicaoCargoComponent } from './cargo/edicao-cargo/edicao-cargo.componen
     AlertaService,
     ErrorService,
     LoggingService,
-    CargoService
+    CargoService,
+    FuncionarioService
   ],
   bootstrap: [AppComponent]
 })

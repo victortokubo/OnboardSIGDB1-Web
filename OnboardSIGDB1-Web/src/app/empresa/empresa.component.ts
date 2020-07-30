@@ -35,7 +35,7 @@ export class EmpresaComponent implements AfterViewInit {
     filtro.nome = this.filtroForm.get('nome').value;
     filtro.cnpj = this.filtroForm.get('cnpj').value;
     filtro.dataFundacao = this.filtroForm.get('dataFundacao').value;
-    this.empresaService.obterEmpresas(filtro).subscribe(result => {
+    this.empresaService.pesquisarEmpresas(filtro).subscribe(result => {
       this.empresas = result;
     },
     error => {

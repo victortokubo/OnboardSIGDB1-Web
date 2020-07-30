@@ -5,6 +5,7 @@ import { EmpresaService } from '../empresa.service';
 import { Router, ActivatedRoute } from '@angular/router';
 import { Empresa } from '../empresa';
 import { DatePipe } from '@angular/common';
+import { CnpjValido } from '../../helper/validacoes';
 
 @Component({
   selector: 'app-edicao-empresa',
@@ -18,7 +19,7 @@ export class EdicaoEmpresaComponent implements OnInit, AfterViewInit {
 
   cadastroForm = new FormGroup({
     nome: new FormControl('', [Validators.required, Validators.maxLength(150)]),
-    cnpj: new FormControl('', [Validators.required]),
+    cnpj: new FormControl('', [Validators.required, CnpjValido]),
     dataFundacao: new FormControl('')
   });
 

@@ -1,3 +1,4 @@
+import { DropdownEmpresa } from './dropdown-empresa';
 import { FiltroEmpresa } from './filtro-empresa';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse, HttpParams } from '@angular/common/http';
@@ -22,7 +23,7 @@ export class EmpresaService {
     )
   }
 
-  obterEmpresas(filtro: FiltroEmpresa): Observable<Empresa[]> {
+  pesquisarEmpresas(filtro: FiltroEmpresa): Observable<Empresa[]> {
     let endpoint = `${this._urlApi}/pesquisar`;
     let params = new HttpParams();
 
@@ -39,6 +40,14 @@ export class EmpresaService {
     let endpoint = `${this._urlApi}/${id}`;
 
     return this.http.get<Empresa>(endpoint).pipe(
+      catchError(this.handleError)
+    )
+  }
+
+  obterDropdownEmpresa(): Observable<DropdownEmpresa[]> {
+    let endpoint = `${this._urlApi}/dropdown`;
+
+    return this.http.get<DropdownEmpresa[]>(endpoint).pipe(
       catchError(this.handleError)
     )
   }

@@ -1,3 +1,7 @@
+.hoverable {
+    cursor: pointer;
+}
+
 .mensagem-erro-form {
     font-size: smaller;
 }

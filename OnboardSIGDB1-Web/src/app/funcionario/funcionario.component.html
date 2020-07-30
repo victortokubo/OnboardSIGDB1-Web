@@ -1,3 +1,81 @@
-<p>
-  funcionario works!
-</p>
+<div class="row">
+  <div class="col-md">
+    <h1>Funcionários</h1>
+  </div>
+</div>
+<form [formGroup]="filtroForm" (ngSubmit)="filtrar()">
+  <div class="row align-items-end">
+    <div class="col-md">
+      <div class="form-group">
+        <label for="nomeFuncionario">Nome</label>
+        <input type="text" formControlName="nome" class="form-control" id="nomeFuncionario" aria-describedby="nomeFuncionario" maxlength="150">
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <label for="cpfFuncionario">CPF</label>
+        <input type="text" appMascaraCpf formControlName="cpf" class="form-control" id="cpfFuncionario" aria-describedby="cpfFuncionario" maxlength="14">
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <label for="dataContratacaoFuncionario">Data Contratação</label>
+        <input type="date" formControlName="dataContratacao" class="form-control" id="dataContratacaoFuncionario"
+          aria-describedby="dataContratacaoFuncionario">
+      </div>
+    </div>
+    <div class="col-md">
+      <div class="form-group">
+        <button type="submit" class="btn btn-primary">Filtrar</button>
+      </div>
+    </div>
+  </div>
+</form>
+<div class="row align-items-end mb-4">
+  <div class="col">
+    <button type="button" class="btn btn-primary" [routerLink]="['/funcionarios/cadastro']">Novo</button>
+  </div>
+</div>
+<div class="row align-items-end mb-4">
+  <div class="col">
+    <div class="table-responsive">
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">NOME</th>
+            <th scope="col">CPF</th>
+            <th scope="col">DATA CONTRATAÇÃO</th>
+            <th scope="col">EMPRESA</th>
+            <th scope="col">CARGO</th>
+            <th scope="col"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let funcionario of funcionarios">
+            <th scope="row">{{ funcionario.id }}</th>
+            <td>{{ funcionario.nome }}</td>
+            <td>{{ funcionario.cpf | cpfPipe }}</td>
+            <td>{{ funcionario.dataContratacao | date:"dd/MM/yyyy" }}</td>
+            <td>{{ funcionario.empresaNome }}</td>
+            <td>{{ funcionario.cargoDescricao }}</td>
+            <td>
+              <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="botaoMaisOpcoes"
+                  data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Mais opções
+                </button>
+                <div class="dropdown-menu" aria-labelledby="botaoMaisOpcoes">
+                  <a class="dropdown-item" [routerLink]="['/funcionarios/cadastro', funcionario.id]">Editar</a>
+                  <a class="dropdown-item hoverable" (click)="excluir(funcionario.id)">Excluir</a>
+                  <a class="dropdown-item" [routerLink]="['/funcionarios/cadastro/vinculo-empresa', funcionario.id]">Vincular Empresa</a>
+                  <a class="dropdown-item" [routerLink]="['/funcionarios/cadastro/vinculo-cargo', funcionario.id]">Vincular Cargo</a>
+                </div>
+              </div>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
