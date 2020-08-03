@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { DropdownCargo } from './dropdown-cargo';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http';
@@ -12,7 +13,7 @@ export class CargoService {
   private readonly _urlApi: string;
 
   constructor(private http: HttpClient) {
-    this._urlApi = 'https://localhost:44325/api/cargo'
+    this._urlApi = `${environment.apiUrl}cargo`;
   }
 
   obterTodaosCargos(): Observable<Cargo[]> {

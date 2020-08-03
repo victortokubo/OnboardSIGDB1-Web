@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { Injectable } from '@angular/core';
 import { FiltroFuncionario } from './filtro-funcionario';
 import { Observable } from 'rxjs/Observable';
@@ -12,7 +13,7 @@ export class FuncionarioService {
   private readonly _urlApi: string;
 
   constructor(private http: HttpClient) {
-    this._urlApi = 'https://localhost:44325/api/funcionario'
+    this._urlApi = `${environment.apiUrl}funcionario`;
   }
 
   obterTodosFuncionarios(): Observable<Funcionario[]> {
@@ -27,8 +28,8 @@ export class FuncionarioService {
     let params = new HttpParams();
 
     params = params.append('Nome', filtro.nome)
-    params = params.append('NumeroDocumento', filtro.cpf)
-    params = params.append('Data', filtro.dataContratacao.toString());
+    params = params.append('Cpf', filtro.cpf)
+    params = params.append('DataContratacao', filtro.dataContratacao.toString());
 
     return this.http.get<Funcionario[]>(endpoint, { params: params }).pipe(
       catchError(this.handleError)

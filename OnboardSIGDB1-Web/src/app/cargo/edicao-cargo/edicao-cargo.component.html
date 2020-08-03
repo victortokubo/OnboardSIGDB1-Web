@@ -3,15 +3,15 @@
     <h1>Edição Cargo</h1>
   </div>
 </div>
-<form [formGroup]="cadastroForm" (ngSubmit)="salvar()">
+<form [formGroup]="cadastroForm" (ngSubmit)="salvar()" autocomplete="off">
   <div class="row">
     <div class="col-md">
       <div class="form-group">
-        <label for="descricaoCargo">Nome</label>
+        <label for="descricaoCargo">Descrição</label>
         <input type="text" formControlName="descricao" class="form-control" id="descricaoCargo" aria-describedby="descricaoCargo"
           required maxlength="250">
         <div *ngIf="tentouSalvar && cadastroForm.get('descricao').errors" class="alert alert-danger">
-          <div *ngIf="cadastroForm.get('descricao').errors.required" class="mensagem-erro-form">Nome é obrigatório</div>
+          <div *ngIf="cadastroForm.get('descricao').errors.required" class="mensagem-erro-form">Descrição é obrigatório</div>
           <div *ngIf="cadastroForm.get('descricao').errors.maxlength" class="mensagem-erro-form">
             Tamanho máximo: {{ cadastroForm.get('descricao').errors.maxlength.requiredLength}}
             Tamanho atual: {{ cadastroForm.get('descricao').errors.maxlength.actualLength}}

@@ -1,3 +1,4 @@
+import { environment } from './../../environments/environment';
 import { DropdownEmpresa } from './dropdown-empresa';
 import { FiltroEmpresa } from './filtro-empresa';
 import { Injectable } from '@angular/core';
@@ -13,7 +14,7 @@ export class EmpresaService {
   private readonly _urlApi: string;
 
   constructor(private http: HttpClient) {
-    this._urlApi = 'https://localhost:44325/api/empresa'
+    this._urlApi = `${environment.apiUrl}empresa`
   }
 
   obterTodasEmpresas(): Observable<Empresa[]> {
@@ -28,8 +29,8 @@ export class EmpresaService {
     let params = new HttpParams();
 
     params = params.append('Nome', filtro.nome)
-    params = params.append('NumeroDocumento', filtro.cnpj)
-    params = params.append('Data', filtro.dataFundacao.toString());
+    params = params.append('Cnpj', filtro.cnpj)
+    params = params.append('DataFundacao', filtro.dataFundacao.toString());
 
     return this.http.get<Empresa[]>(endpoint, { params: params }).pipe(
       catchError(this.handleError)
